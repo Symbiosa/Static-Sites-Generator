@@ -4,14 +4,18 @@ from htmlnode import HTMLNode
 
 
 class TestHTMLNode(unittest.TestCase):
-    def test_eq(self):
-        node = HTMLNode("<a>", "21", "many", "any")
-        node2 = HTMLNode("Node is text", "italic", None, "catcat")
-        node3 = HTMLNode("String", "Kissa", False, "Gotgot")
-        node4 = HTMLNode(self,self,self, "cat")
-        self.assertEqual(node, node2)
-        self.assertEqual(node,node3)
-        self.assertEqual(node,node4)
+    def test_to_html_props(self):
+        node = HTMLNode(
+            "div",
+            "hello,world!",
+            None,
+            {"class": "greetings", "href": "https://boot.dev"}
+        )
+        self.assertEqual(
+            node.PROPS_TO_HTML(),
+            ' class="greeting" href="https://boot.dev"',
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
