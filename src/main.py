@@ -1,6 +1,6 @@
 from textnode import TextNode
 
 def main():
-    TextNode("I do be text", "bold", "www.goat.se")
-
+    node = TextNode("I do be text", "bold", "www.goat.se")
+    print(node)
 main()
