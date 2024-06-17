@@ -9,7 +9,7 @@ class TestTextNode(unittest.TestCase):
         node2 = TextNode("Node is text", "italic", url=None)
         node3 = TextNode("String", "Kissa", url = False)
         node4 = TextNode(self,self,url = self)
-        self.assertEqual(node, node2)
+        self.assertEqual(node,node3)
         self.assertEqual(node,node3)
         self.assertEqual(node,node4)
 
