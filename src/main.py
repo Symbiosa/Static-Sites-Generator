@@ -25,21 +25,26 @@ def recur(src, dest):
 def generatePage(fromPath, templatePath, destPath):
     with open(fromPath, 'r') as file:
         markdown_content = file.read()
+        print("We read FromPath")
         
     title = extractTitle(markdown_content)
     
     htmlContent = markdownToHtmlNode(markdown_content)
+    print(os.path.dirname(templatePath))
     with open(templatePath, 'r') as file:
         template_content = file.read()
-        
+        print("Lets read template")
+    print(template_content)
     finalContent = template_content.replace("{{ Title }}", title).replace("{{ Content }}", htmlContent)
-    
+    print(finalContent)
     destDir = os.path.dirname(destPath)
     if not os.path.exists(destDir):
         os.makedirs(destDir)
+        print("path was not found")
     
     with open(destPath, 'w') as file:
         file.write(finalContent)
+        print("Intense typing")
     
     
     print(f"Generating page from {fromPath} to {destPath} using {templatePath}")
@@ -54,6 +59,6 @@ def main():
     #recur(srcDir,destDir)
     fromPath = "./content/index.md"
     templatePath = "./template.html"
-    destPath = "./public/index.md"
+    destPath = "./public/index.html"
     generatePage(fromPath,templatePath,destPath)
 main()
