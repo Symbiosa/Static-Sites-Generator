@@ -1,5 +1,6 @@
 from textnode import TextNode
-from markdown import extractTitle, markdownToHtmlNode
+from markdownn import extractTitle, generatePage, markdownToHtmlNode
+from markdownnn import generate_page
 import os
 import shutil
 
@@ -21,34 +22,7 @@ def recur(src, dest):
                 print(f"{destPath} new directory created to destination")
             print("diving deeper")
             recur(srcPath,destPath)
-
-def generatePage(fromPath, templatePath, destPath):
-    with open(fromPath, 'r') as file:
-        markdown_content = file.read()
-        print("We read FromPath")
-        
-    title = extractTitle(markdown_content)
     
-    htmlContent = markdownToHtmlNode(markdown_content)
-    print(os.path.dirname(templatePath))
-    with open(templatePath, 'r') as file:
-        template_content = file.read()
-        print("Lets read template")
-    print(template_content)
-    finalContent = template_content.replace("{{ Title }}", title).replace("{{ Content }}", htmlContent)
-    print(finalContent)
-    destDir = os.path.dirname(destPath)
-    if not os.path.exists(destDir):
-        os.makedirs(destDir)
-        print("path was not found")
-    
-    with open(destPath, 'w') as file:
-        file.write(finalContent)
-        print("Intense typing")
-    
-    
-    print(f"Generating page from {fromPath} to {destPath} using {templatePath}")
-
 def main():
     #srcDir = "./static"
     #destDir = "./public"
@@ -57,8 +31,12 @@ def main():
         #shutil.rmtree(destDir)
         #os.makedirs(destDir)
     #recur(srcDir,destDir)
-    fromPath = "./content/index.md"
-    templatePath = "./template.html"
-    destPath = "./public/index.html"
-    generatePage(fromPath,templatePath,destPath)
+    # fromPath = "./content/index.md"
+    # templatePath = "/home/lab/workspace/github.com/SYMBIOSA/StaticSites/template.html"
+    # destPath = "./public/index.html"
+    # generatePage(fromPath,templatePath,destPath)
+    from_path = "./content/index.md"
+    template_path = "./template.html"
+    dest_path = "./public/index.html"
+    generate_page(from_path, template_path,dest_path)
 main()
