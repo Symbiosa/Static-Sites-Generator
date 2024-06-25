@@ -1,6 +1,6 @@
-from textnode import TextNode, splitNodesDelimiter
+from textnode import TextNode
 #from markdownn import extractTitle, generatePage, markdownToHtmlNode
-from markdown import generate_page
+from markdown import generate_page, splitNodesImage, splitNodesDelimiter
 import os
 import shutil
 
@@ -28,5 +28,11 @@ def main():
     # template_path = "./template.html"
     # dest_path = "./public/index.html"
     # generate_page(from_path, template_path,dest_path)
-    splitNodesDelimiter()
+    node = TextNode(
+    "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another ![second image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
+    "text_type_text",
+    )
+    splitNodesImage(node)
+    print(splitNodesImage)
+    
 main()

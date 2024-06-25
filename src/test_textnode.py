@@ -1,15 +1,10 @@
 import unittest
 
-from textnode import TextNode
 from textnode import (
     TextNode,
     textTypeText,
     textTypeBold,
     textTypeItalic,
-    textTypeCode,
-    textTypeImage,
-    textTypeLink,
-    splitNodesDelimiter
 )
 
 class TestTextNode(unittest.TestCase):

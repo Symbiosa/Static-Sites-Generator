@@ -1,6 +1,8 @@
 import unittest
 from markdown import(
     splitNodesDelimiter,
+    extractMarkdownImages,
+    #extractMarkdownLinks,
 )
 
 from textnode import (
@@ -37,6 +39,15 @@ class testMarkdown(unittest.TestCase):
             ],
             newNodes,
         )
-        
+    def testExtractMarkdownImages(self):
+        text = "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and ![another](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/dfsdkjfd.png)"
+        matches = extractMarkdownImages(text)
+        self.assertEqual(
+            [
+                ("image", "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png"),
+                ("another", "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/dfsdkjfd.png")
+            ],
+            matches,
+        )
 if __name__ == "__main__":
     unittest.main()

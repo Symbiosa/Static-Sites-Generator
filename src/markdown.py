@@ -5,6 +5,7 @@ from textnode import (
     textTypeItalic,
     textTypeCode
 )
+import re
 import os
 import markdown2  # Assuming markdown2 for markdown to HTML conversion, e.g., 'pip install markdown2'
 
@@ -13,6 +14,7 @@ def splitNodesDelimiter(oldNodes, delimiter, textType):
     for oldNode in oldNodes:
         if oldNode.textType != textTypeText:
             nodeList.append(oldNode)
+            continue
         splitNodes = []
         sections = oldNode.text.split(delimiter)
         if len(sections) % 2 == 0:
@@ -26,6 +28,24 @@ def splitNodesDelimiter(oldNodes, delimiter, textType):
                 splitNodes.append(TextNode(sections[i], textType))
         nodeList.extend(splitNodes)
     return nodeList
+
+def splitNodesImage(oldNodes):
+    nodeList = []
+    #for oldNode in oldNodes:
+        #extractMarkdownImages(oldNode)
+        #print(extractMarkdownImages(oldNode))
+    delimiter = None
+    
+    return oldNodes
+    
+#def splitNodesLink(oldNodes):
+    
+    
+def extractMarkdownImages(text):
+    return re.findall(r"!\[(.*?)\]\((.*?)\)", text)
+ 
+def extractMarkdownLink(text):
+    return re.findall(r"\[(.*?)\]\((.*?)\)",text)
 
 def extract_title(markdown):
     lines = markdown.split('\n')
