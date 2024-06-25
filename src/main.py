@@ -1,6 +1,6 @@
 from textnode import TextNode
 #from markdownn import extractTitle, generatePage, markdownToHtmlNode
-from markdown import generate_page, splitNodesImage, splitNodesDelimiter
+from markdown import generate_page, splitNodesImage, splitNodesLink, splitNodesDelimiter
 import os
 import shutil
 
@@ -32,7 +32,14 @@ def main():
     "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another ![second image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
     "text_type_text",
     )
-    splitNodesImage(node)
-    print(splitNodesImage)
+    linkNode = TextNode(
+    "This is text with an [link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another [second link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
+    "text_type_text",
+    )
+    newNodes = splitNodesImage([node])
+    newLinks = splitNodesLink([linkNode])
+    print(newNodes)
+    print(newLinks)
+    
     
 main()

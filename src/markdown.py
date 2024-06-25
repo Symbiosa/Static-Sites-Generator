@@ -31,12 +31,32 @@ def splitNodesDelimiter(oldNodes, delimiter, textType):
 
 def splitNodesImage(oldNodes):
     nodeList = []
-    #for oldNode in oldNodes:
-        #extractMarkdownImages(oldNode)
-        #print(extractMarkdownImages(oldNode))
-    delimiter = None
-    
-    return oldNodes
+    for oldNode in oldNodes:
+        try:
+            
+            images = extractMarkdownImages(oldNode.text)
+            
+            if not images:
+                raise ValueError("No images found")
+            
+            currentText = oldNode.text
+            for imageTup in images:
+                before, after = currentText.split(f"![{imageTup[0]}]({imageTup[1]})",1)
+                
+                if before:
+                    nodeList.append(TextNode(before, oldNode.textType))
+                    
+                nodeList.append(TextNode(imageTup[0], "text_type_image", imageTup[1]))
+
+                currentText = after
+            if currentText:
+                nodeList.append(TextNode(currentText, oldNode.textType))
+        except ValueError:
+            nodeList.append(oldNode)
+            continue  
+        splitNodes = []
+        #sections = oldNode.text.split
+    return nodeList
     
 #def splitNodesLink(oldNodes):
     
