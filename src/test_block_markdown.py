@@ -12,7 +12,7 @@ from markdown_blocks import (
 
 
 class TestMarkdownToHTML(unittest.TestCase):
-    def test_markdown_to_blocks(self):
+    def test_markdownToBlocks(self):
         md = """
 This is **bolded** paragraph
 
@@ -22,7 +22,7 @@ This is the same paragraph on a new line
 * This is a list
 * with items
 """
-        blocks = markdown_to_blocks(md)
+        blocks = markdownToBlocks(md)
         self.assertEqual(
             blocks,
             [
@@ -32,7 +32,7 @@ This is the same paragraph on a new line
             ],
         )
 
-    def test_markdown_to_blocks_newlines(self):
+    def test_markdownToBlocks_newlines(self):
         md = """
 This is **bolded** paragraph
 
@@ -45,7 +45,7 @@ This is the same paragraph on a new line
 * This is a list
 * with items
 """
-        blocks = markdown_to_blocks(md)
+        blocks = markdownToBlocks(md)
         self.assertEqual(
             blocks,
             [
@@ -54,7 +54,7 @@ This is the same paragraph on a new line
                 "* This is a list\n* with items",
             ],
         )
-    def testblockToBlockType(self):
+    def test_blockToBlockType(self):
         block = "# heading"
         self.assertEqual(blockToBlockType(block), blockTypeHeading)
         block = "```\ncode\n```"
