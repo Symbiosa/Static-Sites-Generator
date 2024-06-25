@@ -1,6 +1,6 @@
-from textnode import TextNode
-from markdownn import extractTitle, generatePage, markdownToHtmlNode
-from markdownnn import generate_page
+from textnode import TextNode, splitNodesDelimiter
+#from markdownn import extractTitle, generatePage, markdownToHtmlNode
+from markdown import generate_page
 import os
 import shutil
 
@@ -24,19 +24,9 @@ def recur(src, dest):
             recur(srcPath,destPath)
     
 def main():
-    #srcDir = "./static"
-    #destDir = "./public"
-    #if os.path.exists(destDir):
-        #print(f"removing old {destDir} and recreating it")
-        #shutil.rmtree(destDir)
-        #os.makedirs(destDir)
-    #recur(srcDir,destDir)
-    # fromPath = "./content/index.md"
-    # templatePath = "/home/lab/workspace/github.com/SYMBIOSA/StaticSites/template.html"
-    # destPath = "./public/index.html"
-    # generatePage(fromPath,templatePath,destPath)
-    from_path = "./content/index.md"
-    template_path = "./template.html"
-    dest_path = "./public/index.html"
-    generate_page(from_path, template_path,dest_path)
+    # from_path = "./content/index.md"
+    # template_path = "./template.html"
+    # dest_path = "./public/index.html"
+    # generate_page(from_path, template_path,dest_path)
+    splitNodesDelimiter()
 main()
