@@ -10,12 +10,27 @@ import os
 import markdown2  # Assuming markdown2 for markdown to HTML conversion, e.g., 'pip install markdown2'
 
 def textToTextnodes(text):
+    #creating tuple nodes with TextNode object inside, adding more to the tuple everytime we split
     nodes = [TextNode(text, textTypeText)]
-    nodes = splitNodesDelimiter(text,"**",textTypeBold)
-    nodes = splitNodesDelimiter(text,"*", textTypeItalic)
-    nodes = splitNodesDelimiter(text,"`", textTypeCode)
-    nodes = splitNodesImage(text)
-    nodes = splitNodesLink(text)
+    #splitting TextNode object with splitNodesDelimiter, ** Bold **
+    print(nodes)
+    nodes = splitNodesDelimiter(nodes,"**",textTypeBold)
+    print(nodes)
+    #splitting TextNode object with splitNodesDelimiter, * Italic * 
+    nodes = splitNodesDelimiter(nodes,"*", textTypeItalic)
+    print(nodes)
+    #splitting TextNode object with splitNodesDelimiter, ` Code `
+    nodes = splitNodesDelimiter(nodes,"`", textTypeCode)
+    print(nodes)
+    #splitting TextNode object with splitNodesImage
+    nodes = splitNodesImage(nodes)
+    print(nodes)
+    #splitting TextNode object with splitNodesLink
+    nodes = splitNodesLink(nodes)
+    print(nodes)
+    for node in nodes:
+        #printting each object one by one to test function and if it go split corretly
+        print(TextNode.__repr__(node))
     return nodes
 
 def splitNodesDelimiter(oldNodes, delimiter, textType):
