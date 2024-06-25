@@ -9,6 +9,15 @@ import re
 import os
 import markdown2  # Assuming markdown2 for markdown to HTML conversion, e.g., 'pip install markdown2'
 
+def textToTextnodes(text):
+    nodes = [TextNode(text, textTypeText)]
+    nodes = splitNodesDelimiter(text,"**",textTypeBold)
+    nodes = splitNodesDelimiter(text,"*", textTypeItalic)
+    nodes = splitNodesDelimiter(text,"`", textTypeCode)
+    nodes = splitNodesImage(text)
+    nodes = splitNodesLink(text)
+    return nodes
+
 def splitNodesDelimiter(oldNodes, delimiter, textType):
     nodeList = []
     for oldNode in oldNodes:
@@ -54,11 +63,34 @@ def splitNodesImage(oldNodes):
         except ValueError:
             nodeList.append(oldNode)
             continue  
-        splitNodes = []
-        #sections = oldNode.text.split
     return nodeList
     
-#def splitNodesLink(oldNodes):
+def splitNodesLink(oldNodes):
+    nodeList = []
+    for oldNode in oldNodes:
+        try:
+            
+            links = extractMarkdownLink(oldNode.text)
+            
+            if not links:
+                raise ValueError("No links found")
+            
+            currentText = oldNode.text
+            for linkTup in links:
+                before, after = currentText.split(f"[{linkTup[0]}]({linkTup[1]})",1)
+                
+                if before:
+                    nodeList.append(TextNode(before, oldNode.textType))
+                    
+                nodeList.append(TextNode(linkTup[0], "textTypeLink", linkTup[1]))
+
+                currentText = after
+            if currentText:
+                nodeList.append(TextNode(currentText, oldNode.textType))
+        except ValueError:
+            nodeList.append(oldNode)
+            continue  
+    return nodeList
     
     
 def extractMarkdownImages(text):
@@ -66,6 +98,8 @@ def extractMarkdownImages(text):
  
 def extractMarkdownLink(text):
     return re.findall(r"\[(.*?)\]\((.*?)\)",text)
+
+
 
 def extract_title(markdown):
     lines = markdown.split('\n')

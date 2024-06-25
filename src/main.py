@@ -1,6 +1,6 @@
 from textnode import TextNode
 #from markdownn import extractTitle, generatePage, markdownToHtmlNode
-from markdown import generate_page, splitNodesImage, splitNodesLink, splitNodesDelimiter
+from markdown import generate_page, splitNodesImage, splitNodesLink, splitNodesDelimiter, textToTextnodes
 import os
 import shutil
 
@@ -24,22 +24,18 @@ def recur(src, dest):
             recur(srcPath,destPath)
     
 def main():
-    # from_path = "./content/index.md"
-    # template_path = "./template.html"
-    # dest_path = "./public/index.html"
-    # generate_page(from_path, template_path,dest_path)
-    node = TextNode(
-    "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another ![second image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
-    "text_type_text",
-    )
-    linkNode = TextNode(
-    "This is text with an [link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another [second link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
-    "text_type_text",
-    )
-    newNodes = splitNodesImage([node])
-    newLinks = splitNodesLink([linkNode])
-    print(newNodes)
-    print(newLinks)
-    
-    
+    # node = TextNode(
+    # "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another ![second image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
+    # "text_type_text",
+    # )
+    # linkNode = TextNode(
+    # "This is text with an [link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another [second link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
+    # "text_type_text",
+    # )
+    # newNodes = splitNodesImage([node])
+    # newLinks = splitNodesLink([linkNode])
+    # print(newNodes)
+    # print(newLinks)
+    text = "This is **text** with an *italic* word and a `code block` and an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and a [link](https://boot.dev)"
+    textToTextnodes(text)
 main()
