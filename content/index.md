@@ -1,1 +1,3 @@
-# Tolkien Fan Club\n\nWelcome to the Tolkien Fan Club homepage.
+# Tolkien Fan Club
+
+I like Tolkien. Read my [first post here](/majesty)
