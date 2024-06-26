@@ -45,20 +45,26 @@ def generatePageRecur(fromDir, templatePath, destDir):
     if not os.path.exists(destDir):
         print(f"{destDir} doesn't exist")
         raise TypeError(f"{destDir} gone MIA, call the Boots")
+    
     for item in os.listdir(fromDir):
         srcPath = os.path.join(fromDir, item)
         destPath = os.path.join(destDir, item.replace('.md', '.html'))
+        
         if os.path.isfile(srcPath):
             print(f"{srcPath} is a file")
+            
             if srcPath.endswith('.md'):
                 generate_page(srcPath,templatePath,destPath)
                 print(f'Succesfully converted {srcPath}')
+        
         elif os.path.isdir(srcPath):
             print(f"{srcPath} is a dir, diving deeper")
-            if not os.path.exists(destDir):
-                os.makedirs(destPath)
-            generatePageRecur(srcPath, templatePath, destPath)
-    return
+            newDestDir = os.path.join(destDir, item)
+            
+            if not os.path.exists(newDestDir):
+                os.makedirs(newDestDir)
+            
+        generatePageRecur(srcPath, templatePath, newDestDir)
         
 def main():
     fromDir = "./content"               #path to from dir
