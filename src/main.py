@@ -64,11 +64,11 @@ def generatePageRecur(fromDir, templatePath, destDir):
             if not os.path.exists(newDestDir):
                 os.makedirs(newDestDir)
             
-        generatePageRecur(srcPath, templatePath, newDestDir)
+            generatePageRecur(srcPath, templatePath, newDestDir)
         
 def main():
-    fromDir = "./content"               #path to from dir
+    fromDir = "content"               #path to from dir
     templatePath = "./template.html"     #path to template being used
-    destDir = "./public"                #path to destination dir
+    destDir = "public"                #path to destination dir
     generate_page(fromDir, templatePath,destDir)
 main()
