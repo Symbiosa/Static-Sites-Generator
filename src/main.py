@@ -68,7 +68,10 @@ def generatePageRecur(fromDir, templatePath, destDir):
         
 def main():
     fromDir = "content"               #path to from dir
-    templatePath = "./template.html"     #path to template being used
+    templatePath = "template.html"     #path to template being used
     destDir = "public"                #path to destination dir
-    generate_page(fromDir, templatePath,destDir)
+    print(fromDir)
+    print(templatePath)
+    print(destDir)
+    generate_page(fromDir,templatePath,destDir)
 main()
