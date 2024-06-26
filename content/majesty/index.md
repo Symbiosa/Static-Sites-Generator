@@ -1,4 +1,4 @@
-# Tolkien Fan Club
+# The Unparalleled Majesty of "The Lord of the Rings"
 
 [Back Home](/)
 

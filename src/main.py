@@ -1,4 +1,21 @@
-from textnode import TextNode
+from textnode import (
+    TextNode,
+    textTypeText,
+    textTypeBold,
+    textTypeItalic,
+    textTypeCode
+)
+
+from markdown_blocks import (
+    markdownToBlocks,
+    blockToBlockType,
+    blockTypeCode,
+    blockTypeHeading,
+    blockTypeListOrdered,
+    blockTypeListUnordered,
+    blockTypeParagraph,
+    blockTypeQuote,
+)
 #from markdownn import extractTitle, generatePage, markdownToHtmlNode
 from markdown import generate_page, splitNodesImage, splitNodesLink, splitNodesDelimiter, textToTextnodes
 import os
@@ -22,20 +39,30 @@ def recur(src, dest):
                 print(f"{destPath} new directory created to destination")
             print("diving deeper")
             recur(srcPath,destPath)
-    
+
+def generatePageRecur(fromDir, templatePath, destDir):
+    print(f"Generating page for every markdown file in {fromDir} to {destDir} using {templatePath}")
+    if not os.path.exists(destDir):
+        print(f"{destDir} doesn't exist")
+        raise TypeError(f"{destDir} gone MIA, call the Boots")
+    for item in os.listdir(fromDir):
+        srcPath = os.path.join(fromDir, item)
+        destPath = os.path.join(destDir, item.replace('.md', '.html'))
+        if os.path.isfile(srcPath):
+            print(f"{srcPath} is a file")
+            if srcPath.endswith('.md'):
+                generate_page(srcPath,templatePath,destPath)
+                print(f'Succesfully converted {srcPath}')
+        elif os.path.isdir(srcPath):
+            print(f"{srcPath} is a dir, diving deeper")
+            if not os.path.exists(destDir):
+                os.makedirs(destPath)
+            generatePageRecur(srcPath, templatePath, destPath)
+    return
+        
 def main():
-    # node = TextNode(
-    # "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another ![second image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
-    # "text_type_text",
-    # )
-    # linkNode = TextNode(
-    # "This is text with an [link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another [second link](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
-    # "text_type_text",
-    # )
-    # newNodes = splitNodesImage([node])
-    # newLinks = splitNodesLink([linkNode])
-    # print(newNodes)
-    # print(newLinks)
-    text = "This is **text** with an *italic* word and a `code block` and an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and a [link](https://boot.dev)"
-    textToTextnodes(text)
+    fromDir = "./content"               #path to from dir
+    templatePath = "./template.html"     #path to template being used
+    destDir = "./public"                #path to destination dir
+    generate_page(fromDir, templatePath,destDir)
 main()
