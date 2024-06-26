@@ -73,5 +73,7 @@ def main():
     print(fromDir)
     print(templatePath)
     print(destDir)
-    generate_page(fromDir,templatePath,destDir)
+    print(os.listdir(fromDir))
+    print(os.listdir(destDir))
+    generatePageRecur(fromDir,templatePath,destDir)
 main()
